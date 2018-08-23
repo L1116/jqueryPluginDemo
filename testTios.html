@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="tipsplugin.js"></script>
+    <title>Document</title>
+    <style>
+        #s_tips{
+            z-index: 1;
+            display: none;
+            padding: 1rem 2.5rem;
+            position: fixed;
+            left: 50%;
+            top: 90%;
+            transform: translate(-50%,-50%);
+            background-color: rgba(96,100,99,0.9);
+            border-radius: 0.5rem;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(function(){
+            $('#submit_btn').off('click').on('click', function() {
+                    //验证手机号码
+                    var errMsg = "";
+                    var phoneReg = /^\d{11,11}$/;
+                    var otherPhoneNum= $("#phone_num").val();
+                    console.log(otherPhoneNum);
+                    if($.trim(otherPhoneNum)){
+                        if (!phoneReg.test($.trim(otherPhoneNum))) {
+                            errMsg = "请填写正确的手机号";
+                        }else{
+                            errMsg = '输入格式正确';
+                        }
+                    }else{
+                        errMsg = '输入不能为空！';
+                    }
+                    if (errMsg.length) {
+                        $.sTips.show(errMsg);
+                    }
+        });
+        })
+        
+    </script>
+</head>
+<body>
+    <div class="panel">
+        <span class="phone-title">手机号码</span>
+        <input type="text" class="phone-num" id="phone_num" name="phone_num" placeholder="请输入手机号" maxlength="11"/>
+        <input type="button" class="submitbtn" id="submit_btn" value="提交"/>
+    </div>
+</body>
+</html>
